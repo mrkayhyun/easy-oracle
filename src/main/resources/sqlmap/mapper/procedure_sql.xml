@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="procedureDao">
+
+
+	<resultMap type="com.kodframe.easyoracle.db.service.ProcedureVo" id="AllProceduresList-map">
+		<result property="owner" column="OWNER" />
+		<result property="objectName" column="OBJECT_NAME" />
+		<result property="procedureName" column="PROCEDURE_NAME" />
+		<result property="objectType" column="OBJECT_TYPE" />	
+	</resultMap>    
+	<select id="procedureDao.selectAllProceduresList" parameterType="com.kodframe.easyoracle.db.service.ProcedureVo" resultMap="AllProceduresList-map">
+		SELECT 
+			OWNER, 
+			OBJECT_NAME, 
+			PROCEDURE_NAME, 
+			OBJECT_TYPE 
+		FROM ALL_PROCEDURES 
+		WHERE OBJECT_TYPE = #{objectType}
+		AND OWNER = 'SBMUSER'
+		AND PROCEDURE_NAME IS NOT NULL
+<!-- 		<if test="owner != null and owner != ''">
+		AND OWNER = #{owner}
+		</if> -->
+		<if test="objectName != null and objectName != ''">
+		AND OBJECT_NAME = #{objectName}
+		</if>
+		<if test="procedureName != null and procedureName != ''">
+		AND PROCEDURE_NAME = #{procedureName}
+		</if>
+<!-- 		AND OWNER IN ('YOONSCOM_APP','WYNUSER','YFNUSER','PAIDNEAT') -->
+		ORDER BY SUBPROGRAM_ID ASC, PROCEDURE_NAME ASC
+	</select>
+
+	<resultMap type="com.kodframe.easyoracle.db.service.SourceVo" id="AllSourceList-map">
+		<result property="owner" column="OWNER" />
+		<result property="type" column="TYPE" />
+		<result property="line" column="LINE" />
+		<result property="text" column="TEXT" />
+	</resultMap>    
+	<select id="procedureDao.selectAllSourceList" parameterType="com.kodframe.easyoracle.db.service.SourceVo" resultMap="AllSourceList-map">
+		SELECT 
+			NAME, 
+			TYPE, 
+			LINE, 
+			TEXT 
+		FROM ALL_SOURCE 
+		WHERE OWNER = #{owner}
+<!-- 		AND TYPE = #{type} -->
+		AND TYPE = 'PACKAGE BODY'
+		AND NAME = #{name}
+		ORDER BY LINE ASC
+	</select>
+
+	<resultMap type="com.kodframe.easyoracle.db.service.ArgumentVo" id="ArgumentList-map">
+		<result property="packageName" column="PACKAGE_NAME" />
+		<result property="objectName" column="OBJECT_NAME" />
+		<result property="argumentName" column="ARGUMENT_NAME" />
+		<result property="dataType" column="DATA_TYPE" />
+		<result property="inOut" column="IN_OUT" />
+	</resultMap>    
+	<select id="procedureDao.selectArgumentList" parameterType="com.kodframe.easyoracle.db.service.ArgumentVo" resultMap="ArgumentList-map">
+		SELECT
+		  PACKAGE_NAME,
+		  OBJECT_NAME,
+		  ARGUMENT_NAME,
+		  DATA_TYPE,
+		  IN_OUT
+		FROM USER_ARGUMENTS
+		WHERE PACKAGE_NAME = #{packageName}
+		AND OBJECT_NAME = #{objectName}
+		ORDER BY POSITION ASC
+	</select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+<mapper namespace="tableDao">
+
+
+	<resultMap type="com.kodframe.easyoracle.db.service.TableVo" id="AllTablesList-map">
+		<result property="owner" column="OWNER" />
+		<result property="tableName" column="TABLE_NAME" />
+		<result property="tableSpaceName" column="TABLESPACE_NAME" />
+	</resultMap>    
+	<select id="tableDao.selectAllTablesList" parameterType="com.kodframe.easyoracle.db.service.TableVo" resultMap="AllTablesList-map">
+		SELECT OWNER, TABLE_NAME, TABLESPACE_NAME FROM ALL_TABLES
+		WHERE 1=1
+		<if test="owner != null and owner != ''">
+		AND OWNER = #{owner}
+		</if>
+		<if test="tableName != null and tableName != ''">
+		AND TABLE_NAME like '%'||#{tableName}||'%'
+		AND OWNER NOT IN ('SYS','SYSTEM','XDB')
+		</if>
+		ORDER BY TABLESPACE_NAME, TABLE_NAME ASC
+	</select>
+  
+  	<select id="tableDao.selectTableDesc" parameterType="com.kodframe.easyoracle.db.service.TableVo" resultType="HashMap">
+		select c.column_name,  case when data_type = 'CHAR'     then      data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							when data_type = 'VARCHAR'  then      data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							when data_type = 'VARCHAR2' then      data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							when data_type = 'NCHAR'    then      data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							when data_type = 'NUMBER' then      
+										    	case when c.data_precision is null and c.data_scale is null then          'NUMBER' 
+										    	when c.data_precision is null and c.data_scale is not null then          'NUMBER(38,'||c.data_scale||')' 
+											    else           data_type||'('||c.data_precision||','||c.data_SCALE||')'      end    
+		    							when data_type = 'NVARCHAR' then      data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							when data_type = 'NVARCHAR2' then     data_type||'('||c.char_length||decode(char_used,'B',' BYTE','C',' CHAR',null)||')'    
+		    							else      data_type    end data_type,
+		      decode(nullable,'Y','Yes','No') nullable,  
+		      c.DATA_DEFAULT,column_id,   com.comments	     
+		      from sys.all_tab_Columns c, 
+		           sys.all_col_comments com
+			  where 1=1
+			  <if test="owner != null and owner != ''">
+			  and c.owner = #{owner}
+			  </if>
+			  <if test="tableName != null and tableName != ''">
+			  and c.table_name = #{tableName}
+			  </if>
+		      and c.table_name = com.table_name
+		      and c.owner = com.owner
+		      and c.column_name = com.column_name	              
+		      order by column_id
+  	</select>
+
+	<select id="tableDao.selectAllOwner" resultType="HashMap">
+		SELECT USERNAME OWNER FROM ALL_USERS WHERE USERNAME NOT IN ('SYS','SYSTEM','XDB')
+	</select>
+
+	
+</mapper>
