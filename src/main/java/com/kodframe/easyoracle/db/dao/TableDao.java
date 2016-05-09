@@ -27,5 +27,7 @@ public class TableDao {
 		return sqlSession.selectList("tableDao.selectAllOwner");
 	}
 
-	
+	public List<HashMap<String, String>> selectTableDataList(HashMap<String, String> param) {
+		return sqlSession.selectList("tableDao.selectTableDataList", param);
+	}
 }

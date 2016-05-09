@@ -26,4 +26,7 @@ public class TableService {
 		return tableDao.selectAllOwner();
 	}
 
+	public List<HashMap<String, String>> selectTableDataList(HashMap<String, String> param) {
+		return tableDao.selectTableDataList(param);
+	}
 }

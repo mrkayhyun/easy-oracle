@@ -56,5 +56,9 @@
 		SELECT USERNAME OWNER FROM ALL_USERS WHERE USERNAME NOT IN ('SYS','SYSTEM','XDB')
 	</select>
 
-	
+
+	<select id="tableDao.selectTableDataList" parameterType="HashMap" resultType="HashMap">
+		SELECT * FROM ${tableName} 
+	</select>
+		
 </mapper>

@@ -42,7 +42,8 @@
 					<td>{{tl.owner}}</td>
 					<td>
 						<a href="#" ng-click="selectTableDesc(tl.owner, tl.tableName)">{{tl.tableName}}</a>
-						<button class="btn" ngclipboard data-clipboard-text="SELECT * FROM {{tl.tableName}} ;">S</button>
+						<button class="btn" ngclipboard data-clipboard-text="SELECT * FROM {{tl.owner}}.{{tl.tableName}} ;">S</button>
+						<button class="btn" ng-click="selectTableDataList(tl.owner, tl.tableName)">data</button>
 					</td>
 					<td>{{tl.tableSpaceName}}</td>
 				</tr>
@@ -50,11 +51,29 @@
 		</table>	
 	</div>
 	<div class="col-md-6">
+<!-- 		<h5>{{searchtableName}}</h5> -->
+
+<!-- 		<li ng-repeat="tl in tableDataList">
+		<div ng-repeat="(key, value) in tl">{{key}} / {{value}}</div>
+		</li> -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th ng-repeat="dc in tableDataCol">{{dc}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="tl in tableDataList">
+					<td ng-repeat="dc in tableDataCol">{{tl[dc]}}</td>
+				</tr>
+			</tbody>
+		</table>	
+
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>COLUMN_NAME</th>
-					<th>DATA_TYPE</th>
+					<th>DATA_TYPE</th> 
 					<th>NULLABLE</th>
 					<th>DATA_DEFAULT</th>
 					<th>COLUMN_ID</th>

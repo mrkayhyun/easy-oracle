@@ -3,7 +3,10 @@ package com.kodframe.easyoracle.admin.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,6 +107,20 @@ public class AdminController {
 		
 		jsonObject.put("list", procedureService.selectArgumentList(param));
 
+		return jsonObject;
+	}
+
+	@RequestMapping("db/selectTableDataList.do")
+	@ResponseBody
+	public Map<String, Object> selectTableDataList(HttpServletRequest request) throws Exception {
+		Map<String, Object> jsonObject = new HashMap<String, Object>();
+		String tableName = request.getParameter("tableName");
+		
+		System.out.println("== selectTableDataList==");
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("tableName", "MOBILEP.MP_APPINFO");
+		param.put("tableName", tableName);
+		jsonObject.put("list", tableService.selectTableDataList(param));		
 		return jsonObject;
 	}
 	

@@ -25,12 +25,36 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 		            showConsole("== url success!!");
 		            showConsole(data['list']);
 		            $scope.tableDesc = data['list'];
+		            $scope.searchTableName = __tableName;
 		        }).
 		        error(function(data, status, header, config) {
 		        	alertError(url);
 		        });	  			  
 	  }
 
+	  $scope.selectTableDataList = function(__owner, __tableName) {
+		  	var tn = __owner + "." +  __tableName;
+		    var url = "http://localhost:8080/admin/db/selectTableDataList.do?tableName="+tn;
+		    $http.get(url).
+	        success(function(data, status, header, config) {
+	            showConsole("== ++url success!!");
+	            showConsole(data['list']);
+	            $scope.tableDataList = data['list'];
+	            var colName = [];
+	            var colIndex = 0;
+
+	            for(key in  data['list'][0]) {
+	            	showConsole(key);
+	            	colName[colIndex] = key;
+	            	colIndex++;
+	            }
+	            showConsole(colName.length);
+	            $scope.tableDataCol = colName;	        
+	        }).
+	        error(function(data, status, header, config) {
+	        	alertError(url);
+	        });	  			  
+	  }
 	  
 	  $scope.selectAllOwner = function() {
 		    var url = "http://localhost:8080/admin/db/selectAllOwner.do";
