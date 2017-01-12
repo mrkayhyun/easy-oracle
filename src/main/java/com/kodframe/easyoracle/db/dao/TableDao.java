@@ -16,7 +16,7 @@ public class TableDao {
 	private SqlSession sqlSession;
 
 	/**
-	 * Å×ÀÌºí ¸ñ·Ï Á¶È¸
+	 * í…Œì´ë¸” ëª©ë¡ ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */
@@ -25,7 +25,7 @@ public class TableDao {
 	}
 
 	/**
-	 * Å×ÀÌºí »ó¼¼ Á¶È¸
+	 * í…Œì´ë¸” ìƒì„¸ ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */
@@ -34,7 +34,7 @@ public class TableDao {
 	}
 
 	/**
-	 * ¿À³Ê ¸ñ·Ï Á¶È¸
+	 * ì˜¤ë„ˆ ëª©ë¡ ì¡°íšŒ
 	 * @return
 	 */
 	public List<HashMap<String, String>>  selectAllOwner() {
@@ -42,7 +42,7 @@ public class TableDao {
 	}
 
 	/**
-	 * Å×ÀÌºí µ¥ÀÌÅÍ Á¶È¸
+	 * í…Œì´ë¸” ë°ì´í„° ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */

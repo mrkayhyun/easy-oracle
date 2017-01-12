@@ -17,7 +17,7 @@ public class ProcedureDao {
 	private SqlSession sqlSession;
 
 	/**
-	 * ÇÁ·Î½ÃÀú ¸®½ºÆ® Á¶È¸
+	 * í”„ë¡œì‹œì € ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */
@@ -26,7 +26,7 @@ public class ProcedureDao {
 	}
 
 	/**
-	 * ÇÁ·Î½ÃÀú ³»¿ë Á¶È¸
+	 * í”„ë¡œì‹œì € ë‚´ìš© ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class ProcedureDao {
 	}
 
 	/**
-	 * ÇÁ·Î½ÃÀú ÆÄ¶ó¹ÌÅÍ Á¶È¸
+	 * í”„ë¡œì‹œì € íŒŒë¼ë¯¸í„° ì¡°íšŒ
 	 * @param param
 	 * @return
 	 */
