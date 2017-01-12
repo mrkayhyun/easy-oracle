@@ -54,12 +54,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<%=request.getContextPath()%>/admin/db/list.do">easy oracle</a>
+          <a class="navbar-brand" href="<%=request.getContextPath()%>/admin/db/table.do">easy oracle</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li <% if(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1).equals("list.jsp")) { %>class="active"<% } %>><a href="<%=request.getContextPath()%>/admin/db/list.do">Table</a></li>
-            <li <% if(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1).equals("list2.jsp")) { %>class="active"<% } %>><a href="<%=request.getContextPath()%>/admin/db/list2.do">Procedure</a></li>
+            <li <% if(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1).equals("table.jsp")) { %>class="active"<% } %>><a href="<%=request.getContextPath()%>/admin/db/table.do">Table</a></li>
+            <li <% if(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1).equals("procedure.jsp")) { %>class="active"<% } %>><a href="<%=request.getContextPath()%>/admin/db/procedure.do">Procedure</a></li>
           </ul>
         </div>
       </div>

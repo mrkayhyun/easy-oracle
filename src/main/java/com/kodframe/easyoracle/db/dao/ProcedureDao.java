@@ -16,15 +16,29 @@ public class ProcedureDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-
+	/**
+	 * 프로시저 리스트 조회
+	 * @param param
+	 * @return
+	 */
 	public List<ProcedureVo> selectAllProceduresList(ProcedureVo param) {
 		return sqlSession.selectList("procedureDao.selectAllProceduresList", param);
 	}
-	
+
+	/**
+	 * 프로시저 내용 조회
+	 * @param param
+	 * @return
+	 */
 	public List<SourceVo> selectAllSourceList(SourceVo param) {
 		return sqlSession.selectList("procedureDao.selectAllSourceList", param);
 	}
 
+	/**
+	 * 프로시저 파라미터 조회
+	 * @param param
+	 * @return
+	 */
 	public List<ArgumentVo> selectArgumentList(ArgumentVo param) {
 		return sqlSession.selectList("procedureDao.selectArgumentList", param);
 	}

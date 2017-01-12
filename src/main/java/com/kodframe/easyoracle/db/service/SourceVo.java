@@ -7,7 +7,7 @@ public class SourceVo {
 	private String type;
 	private String line;
 	private String text;
-	
+
 	public String getOwner() {
 		return owner;
 	}
@@ -38,8 +38,4 @@ public class SourceVo {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
-	
-	
-	
 }

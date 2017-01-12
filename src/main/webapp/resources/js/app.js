@@ -1,7 +1,9 @@
 var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
   .controller('dbTableListController', function($scope, $http) {
+      var baseUrl = "http://localhost:8090";
+
 	  $scope.selectAllTablesList = function(__owner, __tableName) {
-	    var url = "http://localhost:8080/admin/db/selectAllTablesList.do?tableName="+__tableName;
+	    var url = baseUrl+"/admin/db/selectAllTablesList.do?tableName="+__tableName;
 	    if(__owner != "") {
 	    	url = url+"?owner="+__owner;
 	    }
@@ -18,7 +20,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  }
 	  
 	  $scope.selectTableDesc = function(__owner, __tableName) {
-		    var url = "http://localhost:8080/admin/db/selectTableDesc.do?owner="+__owner+"&tableName="+__tableName;
+		    var url = baseUrl+"/admin/db/selectTableDesc.do?owner="+__owner+"&tableName="+__tableName;
 			
 		    $http.get(url).
 		        success(function(data, status, header, config) {
@@ -34,7 +36,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 
 	  $scope.selectTableDataList = function(__owner, __tableName) {
 		  	var tn = __owner + "." +  __tableName;
-		    var url = "http://localhost:8080/admin/db/selectTableDataList.do?tableName="+tn;
+		    var url = baseUrl+"/admin/db/selectTableDataList.do?tableName="+tn;
 		    $http.get(url).
 	        success(function(data, status, header, config) {
 	            showConsole("== ++url success!!");
@@ -57,7 +59,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  }
 	  
 	  $scope.selectAllOwner = function() {
-		    var url = "http://localhost:8080/admin/db/selectAllOwner.do";
+		    var url = baseUrl+"/admin/db/selectAllOwner.do";
 			
 		    $http.get(url).
 		        success(function(data, status, header, config) {
@@ -69,22 +71,17 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 		        	alertError(url);
 		        });	  			  
 	  }	 
-	  
 
-	  
-	
-//	  $scope.selectAllTablesList();
 	  $scope.selectAllOwner();
   })
   .controller('dbProcedureListController', function($scope, $http) {
+      var baseUrl = "http://localhost:8090";
 
-	  
 	  $scope.selectAllProceduresList = function(__objectType, __owner) {
-		    var url = "http://localhost:8080/admin/db/selectAllProceduresList.do?objectType="+__objectType;
+		    var url = baseUrl+"/admin/db/selectAllProceduresList.do?objectType="+__objectType;
 		    if(__owner != "") {
 		    	url = url+"&owner="+__owner;
 		    }
-		    
 		    $http.get(url).
 		        success(function(data, status, header, config) {
 		            showConsole("== url success!!");
@@ -97,7 +94,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  }
 
 	  $scope.selectAllSourceList = function(__owner, __type, __name) {
-		    var url = "http://localhost:8080/admin/db/selectAllSourceList.do?owner="+__owner+"&type="+__type+"&name="+__name;
+		    var url = baseUrl+"/admin/db/selectAllSourceList.do?owner="+__owner+"&type="+__type+"&name="+__name;
 		
 		    $http.get(url).
 		        success(function(data, status, header, config) {
@@ -116,7 +113,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  }
 
 	  $scope.selectArgumentList = function(__packageName, __objectName) {
-		    var url = "http://localhost:8080/admin/db/selectArgumentList.do?packageName="+__packageName+"&objectName="+__objectName;
+		    var url = baseUrl+"/admin/db/selectArgumentList.do?packageName="+__packageName+"&objectName="+__objectName;
 		
 		    $http.get(url).
 		        success(function(data, status, header, config) {
@@ -132,7 +129,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  
 	  //전역 함수로 선언 할 수 있는 방법 찾아 보기
 	  $scope.selectAllOwner = function() {
-		    var url = "http://localhost:8080/admin/db/selectAllOwner.do";
+		    var url = baseUrl+"/admin/db/selectAllOwner.do";
 			
 		    $http.get(url).
 		        success(function(data, status, header, config) {
@@ -158,13 +155,7 @@ var app = angular.module('kApp', ['ngclipboard','ui.codemirror'])
 	  
   });
 
-
-
-
 app.directive('uppercaseOnly', [
-	// Dependencies
-	
-	// Directive
 	function() {
 	  return {
 	    restrict: 'A',

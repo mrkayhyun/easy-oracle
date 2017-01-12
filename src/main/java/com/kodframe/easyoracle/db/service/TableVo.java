@@ -24,7 +24,5 @@ public class TableVo {
 	public void setTableSpaceName(String tableSpaceName) {
 		this.tableSpaceName = tableSpaceName;
 	}
-	
-	
 
 }
